@@ -57,17 +57,17 @@ LB, O, O, LB, B, B, O, O,
 while True:
     temperature = sense.get_temperature()
     humidity = sense.get_humidity()
-    print("Current temperature:", temperature)
-    print ("Current humidity:", humidity)
+    print("Current temperature:", temperature, " degrees celsius")
+    print ("Current humidity:", humidity,"%")
 
 
-    if temperature <= 5 and humidity >= 10:
+    if temperature <= 5 and humidity >= 65:
        s.set_pixels(HumidAndFrozen)
 
     elif temperature <= 5:
        s.set_pixels(snowflake)
 
-    elif humidity >= 20:
+    elif humidity >= 65:
        s.set_pixels(waterdrop)
 
 

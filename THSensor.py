@@ -1,9 +1,14 @@
 from sense_hat import SenseHat
+import json
+from time import sleep
 import time
+from socket import *
 
+# Initialize Sense HAT
 s = SenseHat()
 s.low_light = True
 sense = SenseHat()
+sense.low_light = True
 sense.clear()
 
 green = (0, 255, 0)
@@ -50,18 +55,23 @@ O, O, LB, LB, B, B, B, O,
 O, LB, O, LB, B, B, B, O,
 LB, O, O, LB, B, B, O, O,
 ]
+# Server details (IP address of your PC)
+serverName = '255.255.255.255'  
+serverPort = 5005
 
+# Configure UDP socket
+clientSocket = socket(AF_INET, SOCK_DGRAM)
+clientSocket.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
 
+# Sensor name
+sensor_name = "Sense HAT"
 
-
+# Data collection and transmission loop
 while True:
-    temperature = sense.get_temperature()
-    humidity = sense.get_humidity()
-    print("Current temperature:", temperature, " degrees celsius")
-    print ("Current humidity:", humidity,"%")
+    temperature = sense.get_temperature()  # Get temperature
+    humidity = sense.get_humidity()  # Get humidity
 
-
-    if temperature <= 5 and humidity >= 65:
+ if temperature <= 5 and humidity >= 65:
        s.set_pixels(HumidAndFrozen)
 
     elif temperature <= 5:
@@ -74,4 +84,16 @@ while True:
     else:
         s.clear(O)
 
-    time.sleep(5)
+
+    # Create data dictionary
+    data = {"SensorName": sensor_name, "Temperature": temperature, "Humidity": humidity}
+    # Convert dictionary to JSON string
+    message = json.dumps(data)
+    # Print data for debugging
+    print(data)
+
+    # Send data via UDP
+    clientSocket.sendto(message.encode(), (serverName, serverPort))
+
+    # Wait for 5 seconds before next reading
+    sleep(5)

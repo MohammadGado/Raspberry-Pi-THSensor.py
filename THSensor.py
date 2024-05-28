@@ -28,7 +28,7 @@ snowflake = [
 LB, O, O, LB, LB, O, O, LB,
 O, LB, O, LB, LB, O, LB, O,
 O, O, LB, LB, LB, LB, O, O,
-LB, LB, LB, LB,LB, LB, LB, LB,
+LB, LB, LB, LB, LB, LB, LB, LB,
 LB, LB, LB, LB, LB, LB, LB, LB,
 O, O, LB, LB, LB, LB, O, O,
 O, LB, O, LB, LB, O, LB, O,
@@ -55,7 +55,7 @@ O, O, LB, LB, B, B, B, O,
 O, LB, O, LB, B, B, B, O,
 LB, O, O, LB, B, B, O, O,
 ]
-# Server details (IP address of your PC)
+# Server detailS
 serverName = '255.255.255.255'  
 serverPort = 5005
 
